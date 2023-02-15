@@ -51,12 +51,12 @@ public class ModeloAlumnos {
 			String nombre=resultSet.getString("Nombre");
 			String apellido=resultSet.getString("Apellido");
 			String dni=resultSet.getString("DNI");
-			String direccion=resultSet.getString("Direccion");
+			String localidad=resultSet.getString("Localidad");
 			String mail=resultSet.getString("mail");
-			String telefono=resultSet.getString("telefono");
+			String grupo=resultSet.getString("grupo");
 			
 			//Vamos guardando en una variable temporal todos los datos extraidos.
-			Alumnos tempAlumnos = new Alumnos(id,nombre,apellido,dni,direccion,mail,telefono);
+			Alumnos tempAlumnos = new Alumnos(id,nombre,apellido,dni,localidad,mail,grupo);
 			//Agregamos a la lista
 			alumnos.add(tempAlumnos);
 		}

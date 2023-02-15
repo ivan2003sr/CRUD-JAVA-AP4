@@ -52,9 +52,9 @@ background-color:#f4f4f4;
 <td class="titulos">Nombre</td>
 <td class="titulos">Apellido</td>
 <td class="titulos">DNI</td>
-<td class="titulos">Dirección</td>
+<td class="titulos">Localidad</td>
 <td class="titulos">e-mail</td>
-<td class="titulos">Teléfono</td>
+<td class="titulos">Grupo</td>
 
 </tr>
 
@@ -67,9 +67,9 @@ background-color:#f4f4f4;
 <td>${tempAlumnos.nombre}</td>
 <td>${tempAlumnos.apellido}</td>
 <td>${tempAlumnos.dni}</td>
-<td>${tempAlumnos.direccion}</td>
+<td>${tempAlumnos.localidad}</td>
 <td>${tempAlumnos.mail}</td>
-<td>${tempAlumnos.telefono}</td>
+<td>${tempAlumnos.grupo}</td>
 </tr>
 
 </c:forEach>
