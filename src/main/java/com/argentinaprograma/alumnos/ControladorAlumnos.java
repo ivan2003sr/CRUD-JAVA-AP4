@@ -51,6 +51,34 @@ public void init() throws ServletException {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// Leer el parámetro que llega desde el formulario
+		String comando= request.getParameter("instruccion");
+		
+		//Si no está ese parámetro, que liste los productos.
+		if(comando==null) comando="listar";
+		
+		//Redirigir el flujo al método listar o insertar.
+		switch (comando) {
+		
+		case "listar":
+			listarAlumnos(request, response);
+			break;
+		case "insertarBBDD":
+			agregarAlumnos(request, response);
+			break;
+			
+		default:
+			System.out.println("Algo está mal, no debería entrar nunca acá");
+
+		}
+		
+		
+
+	}
+
+	private void listarAlumnos(HttpServletRequest request, HttpServletResponse response) {
+
 		//Creamos la lista
 		List<Alumnos> alumnos;
 		
@@ -74,15 +102,35 @@ public void init() throws ServletException {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+		}
+		
 	}
+	
+	private void agregarAlumnos(HttpServletRequest request, HttpServletResponse response) {
+		//Leer la información que vino del formulario
+		String nombre=request.getParameter("nombre");
+		String apellido=request.getParameter("apellido");
+		String dni=request.getParameter("dni");
+		String direccion=request.getParameter("direccion");
+		String email=request.getParameter("email");
+		String telefono=request.getParameter("telefono");
+		
+		//Crear un objeto de tipo alumno
+		Alumnos nuevoAlumno= new Alumnos(nombre,apellido,dni,direccion,email,telefono);
+		
+		//Enviar el alumno al modelo y después insertar el objeto a la BBDD
+		
+		modeloAlumnos.agregarAlumno(nuevoAlumno);
+		
+		//volver al listado
+		
+		listarAlumnos(request, response);
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
+	
+	
+	
 
 }

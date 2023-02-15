@@ -1,6 +1,7 @@
 package com.argentinaprograma.alumnos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -61,6 +62,40 @@ public class ModeloAlumnos {
 		}
 		//retornamos la lista
 		return alumnos;
+	}
+	public void agregarAlumno(Alumnos nuevoAlumno) {
+		// Obtener la conexión con la base de datos
+		Connection conexion=null;
+		PreparedStatement preparedStatement=null;
+		
+		try {
+			conexion=origenDatos.getConnection();
+			
+			//Crear la instrucción SQL
+			
+			String sql = "INSERT INTO alumnos (Nombre, Apellido, DNI, Direccion, mail, telefono)"
+					+ "VALUES(?,?,?,?,?,?)";
+			
+			preparedStatement=conexion.prepareStatement(sql);
+			
+			//Rescatar los parámetros para el alumno
+			
+			preparedStatement.setString(1, nuevoAlumno.getNombre());
+			preparedStatement.setString(2, nuevoAlumno.getApellido());
+			preparedStatement.setString(3, nuevoAlumno.getDni());
+			preparedStatement.setString(4, nuevoAlumno.getDireccion());
+			preparedStatement.setString(5, nuevoAlumno.getMail());
+			preparedStatement.setString(6, nuevoAlumno.getTelefono());
+			//Ejecutar la instrucicón SQL insertando al alumno
+			
+			preparedStatement.execute();
+			
+		}catch (Exception e) {
+			
+		}
+		
+		
+		
 	}
 	
 	

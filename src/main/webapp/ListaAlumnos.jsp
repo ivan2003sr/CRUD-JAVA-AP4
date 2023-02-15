@@ -8,6 +8,21 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
+<!--  Decoración bootstrap -->
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0
+.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min
+.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/p
+opper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.
+min.js"></script>
+
 <!-- Creamos decoración CSS -->
 <style type="text/css">
 .titulos{
@@ -61,8 +76,11 @@ background-color:#f4f4f4;
 
 </table>
 
-
-
+<!--  agrego boton para insertar  -->
+<br>
+<div id="boton">
+<button type="button" class="btn btn-primary" onclick="window.location.href='insertarAlumno.jsp'">Agregar Alumno</button>
+</div>
 
 
 </body>
