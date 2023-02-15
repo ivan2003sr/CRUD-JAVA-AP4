@@ -32,14 +32,14 @@
       <label for="dni">DNI:</label>
       <input type="text" id="dni" name="dni">
 	  
-      <label for="direccion">Dirección:</label>
-      <input type="text" id="direccion" name="direccion">
+      <label for="direccion">Localidad:</label>
+      <input type="text" id="localidad" name="localidad">
 	  
       <label for="email">Email:</label>
       <input type="email" id="email" name="email">
 	  
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono">
+      <label for="telefono">Grupo:</label>
+      <input type="grupo" id="grupo" name="grupo">
 	  
       <input type="submit" value="Agregar">
       <input type="submit" value="Reestablecer">
