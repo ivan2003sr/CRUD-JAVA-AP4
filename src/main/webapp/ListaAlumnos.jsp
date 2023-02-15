@@ -55,12 +55,22 @@ background-color:#f4f4f4;
 <td class="titulos">Localidad</td>
 <td class="titulos">e-mail</td>
 <td class="titulos">Grupo</td>
+<td class="titulos">Actualizar datos</td>
 
 </tr>
 
 <!-- Bucle for usando jstl -->
 
 <c:forEach var="tempAlumnos" items="${ListaAlumnos}">
+
+<!-- Link para cada alumno con su id -->
+
+<c:url var="linkTemp" value="ControladorAlumnos">
+<c:param name="instruccion" value="update"></c:param>
+<c:param name="IdAlumno" value="${tempAlumnos.id}"></c:param>
+
+
+</c:url>
 
 <tr>
 <td>${tempAlumnos.id}</td>
@@ -70,6 +80,7 @@ background-color:#f4f4f4;
 <td>${tempAlumnos.localidad}</td>
 <td>${tempAlumnos.mail}</td>
 <td>${tempAlumnos.grupo}</td>
+<td><a href="${linkTemp}">Actualiza</a></td>
 </tr>
 
 </c:forEach>
