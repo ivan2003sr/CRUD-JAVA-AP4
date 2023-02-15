@@ -111,12 +111,12 @@ public void init() throws ServletException {
 		String nombre=request.getParameter("nombre");
 		String apellido=request.getParameter("apellido");
 		String dni=request.getParameter("dni");
-		String direccion=request.getParameter("direccion");
+		String localidad=request.getParameter("localidad");
 		String email=request.getParameter("email");
-		String telefono=request.getParameter("telefono");
+		String grupo=request.getParameter("grupo");
 		
 		//Crear un objeto de tipo alumno
-		Alumnos nuevoAlumno= new Alumnos(nombre,apellido,dni,direccion,email,telefono);
+		Alumnos nuevoAlumno= new Alumnos(nombre,apellido,dni,localidad,email,grupo);
 		
 		//Enviar el alumno al modelo y después insertar el objeto a la BBDD
 		

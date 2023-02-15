@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!--  Decoración bootstrap -->
+<!--  DecoraciÃ³n bootstrap -->
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0
@@ -39,7 +39,7 @@ min.js"></script>
 </head>
 <body>
 
-<!-- con método get viaja hacia el controlador -->
+<!-- con mÃ©todo get viaja hacia el controlador -->
 <form name="form1" method="get" action="ControladorAlumnos">
 <input type="hidden" name="instruccion" value="insertarBBDD">
       <label for="nombre">Nombre:</label>
@@ -58,7 +58,7 @@ min.js"></script>
       <input type="email" id="email" name="email">
 	  
       <label for="telefono">Grupo:</label>
-      <input type="grupo" id="grupo" name="grupo">
+      <input type="text" id="grupo" name="grupo">
 	  
       <input type="submit" value="Agregar">
       <input type="submit" value="Reestablecer">

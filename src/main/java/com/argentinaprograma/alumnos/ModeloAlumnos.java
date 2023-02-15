@@ -73,7 +73,7 @@ public class ModeloAlumnos {
 			
 			//Crear la instrucción SQL
 			
-			String sql = "INSERT INTO alumnos (Nombre, Apellido, DNI, Direccion, mail, telefono)"
+			String sql = "INSERT INTO alumnos (Nombre, Apellido, DNI, Localidad, mail, grupo)"
 					+ "VALUES(?,?,?,?,?,?)";
 			
 			preparedStatement=conexion.prepareStatement(sql);
@@ -83,9 +83,9 @@ public class ModeloAlumnos {
 			preparedStatement.setString(1, nuevoAlumno.getNombre());
 			preparedStatement.setString(2, nuevoAlumno.getApellido());
 			preparedStatement.setString(3, nuevoAlumno.getDni());
-			preparedStatement.setString(4, nuevoAlumno.getDireccion());
+			preparedStatement.setString(4, nuevoAlumno.getLocalidad());
 			preparedStatement.setString(5, nuevoAlumno.getMail());
-			preparedStatement.setString(6, nuevoAlumno.getTelefono());
+			preparedStatement.setString(6, nuevoAlumno.getGrupo());
 			//Ejecutar la instrucicón SQL insertando al alumno
 			
 			preparedStatement.execute();

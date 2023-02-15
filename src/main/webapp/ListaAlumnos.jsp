@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <!-- Importamos la tag-lib jstl. Se usa para no mezclar código java con código html-->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <!-- Importamos la tag-lib jstl. Se usa para no mezclar cÃ³digo java con cÃ³digo html-->
    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!--  Decoración bootstrap -->
+<!--  DecoraciÃ³n bootstrap -->
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0
@@ -23,7 +23,7 @@ opper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.
 min.js"></script>
 
-<!-- Creamos decoración CSS -->
+<!-- Creamos decoraciÃ³n CSS -->
 <style type="text/css">
 .titulos{
 
@@ -46,7 +46,7 @@ background-color:#f4f4f4;
 
 <table>
 
-<!-- Títulos de la tabla -->
+<!-- TÃ­tulos de la tabla -->
 <tr>
 <td class="titulos">Id</td>
 <td class="titulos">Nombre</td>
