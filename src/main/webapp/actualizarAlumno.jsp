@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+       <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,24 +43,25 @@ min.js"></script>
 
 <!-- con método get viaja hacia el controlador -->
 <form name="form1" method="get" action="ControladorAlumnos">
-<input type="hidden" name="instruccion" value="insertarBBDD">
+<input type="hidden" name="instruccion" value="actualizarBBDD">
+<input type="hidden" name="IdAlumno" value="${IdActualizar.id}">
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre">
+      <input type="text" id="nombre" name="nombre"  value="${IdActualizar.nombre}">
 	  
       <label for="apellido">Apellido:</label>
-      <input type="text" id="apellido" name="apellido">
+      <input type="text" id="apellido" name="apellido"  value="${IdActualizar.apellido}">
 	  
       <label for="dni">DNI:</label>
-      <input type="text" id="dni" name="dni">
+      <input type="text" id="dni" name="dni"  value="${IdActualizar.dni}">
 	  
       <label for="direccion">Localidad:</label>
-      <input type="text" id="localidad" name="localidad">
+      <input type="text" id="localidad" name="localidad"  value="${IdActualizar.localidad}">
 	  
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
+      <input type="email" id="email" name="email"  value="${IdActualizar.mail}">
 	  
       <label for="grupo">Grupo:</label>
-      <input type="text" id="grupo" name="grupo">
+      <input type="text" id="grupo" name="grupo"  value="${IdActualizar.grupo}">
 	  
       <input type="submit" value="Agregar">
       <input type="submit" value="Reestablecer">

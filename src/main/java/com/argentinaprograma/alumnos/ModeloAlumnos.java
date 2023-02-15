@@ -97,6 +97,56 @@ public class ModeloAlumnos {
 		
 		
 	}
+
+	public Alumnos getAlumno(String idAlumno) {
+		
+		Alumnos alumno=null;
+		Connection conection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet=null;
+		//String idAlumno1 = idAlumno;
+		
+		try {
+		//Conectar a la BBFDD
+		conection=origenDatos.getConnection();
+		//Generar SQL que busque el alumno
+		String sql = "SELECT * FROM alumnos WHERE Id=?";
+		
+		//Crear la consulta preparada
+		
+		preparedStatement=conection.prepareStatement(sql);
+		
+		//Establecer parámetros
+		preparedStatement.setString(1, idAlumno);
+		//Ejecutar la consulta
+		
+		resultSet=preparedStatement.executeQuery();
+		
+		//Obtener los datos de respuesta
+		
+		if(resultSet.next()) {
+			
+
+			String nombre=resultSet.getString("Nombre");
+			String apellido=resultSet.getString("Apellido");
+			String dni=resultSet.getString("DNI");
+			String localidad=resultSet.getString("Localidad");
+			String mail=resultSet.getString("mail");
+			String grupo=resultSet.getString("grupo");
+			
+			//Guardamos los datos
+			
+			alumno = new Alumnos(nombre,apellido,dni,localidad,mail,grupo);
+			
+		} else {
+			throw new Exception("No se encuentra ese alumno con código = " + idAlumno);
+		}
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return alumno;
+	}
 	
 	
 

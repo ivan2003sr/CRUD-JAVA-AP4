@@ -57,7 +57,7 @@ public void init() throws ServletException {
 		
 		//Si no está ese parámetro, que liste los productos.
 		if(comando==null) comando="listar";
-		
+		try {
 		//Redirigir el flujo al método listar o insertar.
 		switch (comando) {
 		
@@ -68,16 +68,24 @@ public void init() throws ServletException {
 			agregarAlumnos(request, response);
 			break;
 			
+		case "update":
+			actualizarAlumnos(request, response);
+			break;
+			
 		default:
 			System.out.println("Algo está mal, no debería entrar nunca acá");
 
 		}
 		
-		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 
 	}
 
-	private void listarAlumnos(HttpServletRequest request, HttpServletResponse response) {
+
+
+	private void listarAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
 		//Creamos la lista
 		List<Alumnos> alumnos;
@@ -106,7 +114,7 @@ public void init() throws ServletException {
 		
 	}
 	
-	private void agregarAlumnos(HttpServletRequest request, HttpServletResponse response) {
+	private void agregarAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		//Leer la información que vino del formulario
 		String nombre=request.getParameter("nombre");
 		String apellido=request.getParameter("apellido");
@@ -127,6 +135,26 @@ public void init() throws ServletException {
 		listarAlumnos(request, response);
 		
 	}
+	
+	private void actualizarAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		//Leer el ID que viene del listado
+		String idAlumno = request.getParameter("IdAlumno");
+		
+		//Enviar el ID al modelo, Comunicar con el modelo para que haga una consulta a la BBDD con el ID
+		Alumnos alumno= modeloAlumnos.getAlumno(idAlumno);
+		
+		// Rescatar los atributos
+		request.setAttribute("IdActualizar", alumno);
+		
+		//Enviar los atributos al formulario actualizar
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/actualizarAlumno.jsp");
+		requestDispatcher.forward(request, response);
+		
+	}
+	
+	
 
 	
 	
