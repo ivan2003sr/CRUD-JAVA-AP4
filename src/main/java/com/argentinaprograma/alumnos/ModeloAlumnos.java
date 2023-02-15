@@ -147,6 +147,12 @@ public class ModeloAlumnos {
 		}
 		return alumno;
 	}
+
+	public void actualizaBBDD(Alumnos alumnoActualizado) {
+		
+		
+		
+	}
 	
 	
 

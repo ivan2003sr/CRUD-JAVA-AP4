@@ -69,7 +69,11 @@ public void init() throws ServletException {
 			break;
 			
 		case "update":
-			actualizarAlumnos(request, response);
+			rescatarAlumno(request, response);
+			break;
+			
+		case "actualizarBBDD":
+			actualizaAlumno(request,response);
 			break;
 			
 		default:
@@ -82,6 +86,8 @@ public void init() throws ServletException {
 		}
 
 	}
+
+
 
 
 
@@ -136,7 +142,7 @@ public void init() throws ServletException {
 		
 	}
 	
-	private void actualizarAlumnos(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private void rescatarAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		//Leer el ID que viene del listado
 		String idAlumno = request.getParameter("IdAlumno");
@@ -153,6 +159,30 @@ public void init() throws ServletException {
 		requestDispatcher.forward(request, response);
 		
 	}
+	
+	private void actualizaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		//Leer los datos que vienen del formulario de actualizar
+		String nombre=request.getParameter("nombre");
+		String apellido=request.getParameter("apellido");
+		String dni=request.getParameter("dni");
+		String localidad=request.getParameter("localidad");
+		String email=request.getParameter("email");
+		String grupo=request.getParameter("grupo");
+		
+		//Crear un alumno con esta info
+		Alumnos alumnoActualizado= new Alumnos(nombre,apellido,dni,localidad,email,grupo);
+		
+		//Actulizar la BBDD
+		
+		modeloAlumnos.actualizaBBDD(alumnoActualizado);
+		
+		//Volver al listado
+		listarAlumnos(request, response);
+		
+	}
+	
+	
 	
 	
 

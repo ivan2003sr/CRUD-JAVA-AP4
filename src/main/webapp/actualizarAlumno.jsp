@@ -63,7 +63,7 @@ min.js"></script>
       <label for="grupo">Grupo:</label>
       <input type="text" id="grupo" name="grupo"  value="${IdActualizar.grupo}">
 	  
-      <input type="submit" value="Agregar">
+      <input type="submit" value="Actualizar Datos">
       <input type="submit" value="Reestablecer">
 </form>
 
