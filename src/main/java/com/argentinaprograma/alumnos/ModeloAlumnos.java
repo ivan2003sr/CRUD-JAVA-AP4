@@ -104,7 +104,7 @@ public class ModeloAlumnos {
 		Connection conection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
-		//String idAlumno1 = idAlumno;
+		
 		
 		try {
 		//Conectar a la BBFDD
@@ -126,7 +126,7 @@ public class ModeloAlumnos {
 		
 		if(resultSet.next()) {
 			
-
+			String id=resultSet.getString("Id");
 			String nombre=resultSet.getString("Nombre");
 			String apellido=resultSet.getString("Apellido");
 			String dni=resultSet.getString("DNI");
@@ -136,7 +136,8 @@ public class ModeloAlumnos {
 			
 			//Guardamos los datos
 			
-			alumno = new Alumnos(nombre,apellido,dni,localidad,mail,grupo);
+			alumno = new Alumnos(id,nombre,apellido,dni,localidad,mail,grupo);
+			
 			
 		} else {
 			throw new Exception("No se encuentra ese alumno con código = " + idAlumno);
@@ -145,13 +146,39 @@ public class ModeloAlumnos {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	
 		return alumno;
 	}
 
-	public void actualizaBBDD(Alumnos alumnoActualizado) {
+	public void actualizaBBDD(Alumnos alumnoActualizado) throws Exception {
+		
+		Connection conection=null;
+		PreparedStatement preparedStatement=null;
 		
 		
+		//Conecto:
+		conection=origenDatos.getConnection();
 		
+		//Creo la sentencia SQL
+		
+		String sql = "UPDATE alumnos SET Nombre=?, Apellido=?, DNi=?, Localidad=?, mail=?, grupo=? WHERE Id=?";
+		
+		preparedStatement=conection.prepareStatement(sql);
+		
+		//Paso los parámetros
+		
+		preparedStatement.setString(1,alumnoActualizado.getNombre());
+		preparedStatement.setString(2,alumnoActualizado.getApellido());
+		preparedStatement.setString(3,alumnoActualizado.getDni());
+		preparedStatement.setString(4,alumnoActualizado.getLocalidad());
+		preparedStatement.setString(5,alumnoActualizado.getMail());
+		preparedStatement.setString(6,alumnoActualizado.getGrupo());
+		preparedStatement.setString(7,alumnoActualizado.getId());
+		
+		//Ejecuto
+		preparedStatement.execute();
+		
+	
 	}
 	
 	

@@ -163,6 +163,7 @@ public void init() throws ServletException {
 	private void actualizaAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		//Leer los datos que vienen del formulario de actualizar
+		String id=request.getParameter("IdAlumno");
 		String nombre=request.getParameter("nombre");
 		String apellido=request.getParameter("apellido");
 		String dni=request.getParameter("dni");
@@ -171,8 +172,8 @@ public void init() throws ServletException {
 		String grupo=request.getParameter("grupo");
 		
 		//Crear un alumno con esta info
-		Alumnos alumnoActualizado= new Alumnos(nombre,apellido,dni,localidad,email,grupo);
-		
+		Alumnos alumnoActualizado= new Alumnos(id,nombre,apellido,dni,localidad,email,grupo);
+
 		//Actulizar la BBDD
 		
 		modeloAlumnos.actualizaBBDD(alumnoActualizado);
