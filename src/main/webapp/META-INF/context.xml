@@ -1,0 +1,12 @@
+<Context>
+
+<!-- Pool de conexiones.  -->
+
+<Resource name="jdbc/YoProgramo" auth="Container" type="javax.sql.DataSource"
+			maxActive="15" maxIdle="3" maxWait="5000"
+			username="root" password=""
+			driverClassName="com.mysql.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/argentinaprograma">
+</Resource>
+
+</Context>
