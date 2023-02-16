@@ -180,6 +180,29 @@ public class ModeloAlumnos {
 		
 	
 	}
+
+	public void eliminarAlumno(String id) throws Exception{
+		Connection conection=null;
+		PreparedStatement preparedStatement=null;
+		
+		
+		//Conecto:
+		conection=origenDatos.getConnection();
+		
+		
+		//Creo SQL
+		String sql="DELETE FROM alumnos WHERE Id=?";
+		
+		//Preparo consulta
+	preparedStatement=conection.prepareStatement(sql);
+		
+		//Establezco parámetros
+		
+		preparedStatement.setString(1,id);
+		//Ejecuto
+	preparedStatement.execute();
+		
+	}
 	
 	
 

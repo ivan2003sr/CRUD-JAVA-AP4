@@ -72,6 +72,12 @@ background-color:#f4f4f4;
 
 </c:url>
 
+<!-- Link para eliminar -->
+<c:url var="linkTempDelete" value="ControladorAlumnos">
+<c:param name="instruccion" value="delete"></c:param>
+<c:param name="IdAlumno" value="${tempAlumnos.id}"></c:param>
+</c:url>
+
 <tr>
 <td>${tempAlumnos.id}</td>
 <td>${tempAlumnos.nombre}</td>
@@ -80,7 +86,8 @@ background-color:#f4f4f4;
 <td>${tempAlumnos.localidad}</td>
 <td>${tempAlumnos.mail}</td>
 <td>${tempAlumnos.grupo}</td>
-<td><a href="${linkTemp}">Actualiza</a></td>
+<td><a href="${linkTemp}">Actualiza</a>&nbsp;&nbsp;<a href="${linkTempDelete}">Borrar</a></td>
+
 </tr>
 
 </c:forEach>

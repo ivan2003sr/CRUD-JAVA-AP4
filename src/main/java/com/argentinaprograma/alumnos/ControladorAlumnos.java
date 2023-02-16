@@ -76,8 +76,12 @@ public void init() throws ServletException {
 			actualizaAlumno(request,response);
 			break;
 			
+		case "delete":
+			eliminarAlumno(request,response);
+			break;
+			
 		default:
-			System.out.println("Algo está mal, no debería entrar nunca acá");
+			System.out.println("Algo esta mal, no debe entrar nunca aca");
 
 		}
 		
@@ -86,6 +90,8 @@ public void init() throws ServletException {
 		}
 
 	}
+
+
 
 
 
@@ -179,6 +185,19 @@ public void init() throws ServletException {
 		modeloAlumnos.actualizaBBDD(alumnoActualizado);
 		
 		//Volver al listado
+		listarAlumnos(request, response);
+		
+	}
+	
+	private void eliminarAlumno(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		//Capturar el ID
+		
+		String id=request.getParameter("IdAlumno");
+		//Borrar de la BBDD
+		modeloAlumnos.eliminarAlumno(id);
+		
+		//Volver a la lista
 		listarAlumnos(request, response);
 		
 	}
