@@ -3,6 +3,7 @@ package com.argentinaprograma.alumnos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,11 @@ public class ModeloAlumnos {
 	
 	
 	private DataSource origenDatos;
+	private Connection connection=null;
+	private Statement statement=null;
+	private ResultSet resultSet=null;
+	private PreparedStatement preparedStatement=null;
+	private Alumnos alumnos = null;
 	
 	//Constructor que setea origenDatos
 	public ModeloAlumnos(DataSource origenDatos ) {
@@ -22,24 +28,22 @@ public class ModeloAlumnos {
 		
 	}
 	
-	//Obtener listado de productos. Ponemos que puede dar error la conexi贸n.
+	//Obtener listado de productos. Ponemos que puede dar error la conexi髇.
 	public List<Alumnos> getAlumnos() throws Exception{
 		
 		//Creamos una lista donde guardaremos los alumnos
-		List<Alumnos> alumnos = new ArrayList<>();
+		List<Alumnos> alumnosList = new ArrayList<>();
 		
-		Connection conexion=null;
-		Statement statement=null;
-		ResultSet resultSet=null;
+
 		
-		//Establecemos la conexi贸n
-		conexion=origenDatos.getConnection();
+		//Establecemos la conexi髇
+		connection=origenDatos.getConnection();
 		
 		
 		//Creamos la consulta SQL y el creamos el Statement.
 		
 		String miSql="SELECT * FROM alumnos";
-		statement=conexion.createStatement();
+		statement=connection.createStatement();
 		
 		//ejecutamos la consulta
 		
@@ -56,27 +60,29 @@ public class ModeloAlumnos {
 			String grupo=resultSet.getString("grupo");
 			
 			//Vamos guardando en una variable temporal todos los datos extraidos.
-			Alumnos tempAlumnos = new Alumnos(id,nombre,apellido,dni,localidad,mail,grupo);
+			alumnos = new Alumnos(id,nombre,apellido,dni,localidad,mail,grupo);
 			//Agregamos a la lista
-			alumnos.add(tempAlumnos);
+			alumnosList.add(alumnos);
 		}
+		
+		statement.close();
+		connection.close();
 		//retornamos la lista
-		return alumnos;
+		return alumnosList;
 	}
-	public void agregarAlumno(Alumnos nuevoAlumno) {
+	public void agregarAlumno(Alumnos nuevoAlumno) throws Exception {
 		// Obtener la conexi贸n con la base de datos
-		Connection conexion=null;
-		PreparedStatement preparedStatement=null;
+		
 		
 		try {
-			conexion=origenDatos.getConnection();
+			connection=origenDatos.getConnection();
 			
 			//Crear la instrucci贸n SQL
 			
 			String sql = "INSERT INTO alumnos (Nombre, Apellido, DNI, Localidad, mail, grupo)"
 					+ "VALUES(?,?,?,?,?,?)";
 			
-			preparedStatement=conexion.prepareStatement(sql);
+			preparedStatement=connection.prepareStatement(sql);
 			
 			//Rescatar los par谩metros para el alumno
 			
@@ -92,29 +98,26 @@ public class ModeloAlumnos {
 			
 		}catch (Exception e) {
 			
+		}finally {
+			preparedStatement.close();
+			connection.close();
 		}
 		
 		
 		
 	}
 
-	public Alumnos getAlumno(String idAlumno) {
-		
-		Alumnos alumno=null;
-		Connection conection=null;
-		PreparedStatement preparedStatement=null;
-		ResultSet resultSet=null;
-		
+	public Alumnos getAlumno(String idAlumno) throws SQLException {
 		
 		try {
 		//Conectar a la BBFDD
-		conection=origenDatos.getConnection();
+			connection=origenDatos.getConnection();
 		//Generar SQL que busque el alumno
 		String sql = "SELECT * FROM alumnos WHERE Id=?";
 		
 		//Crear la consulta preparada
 		
-		preparedStatement=conection.prepareStatement(sql);
+		preparedStatement=connection.prepareStatement(sql);
 		
 		//Establecer par谩metros
 		preparedStatement.setString(1, idAlumno);
@@ -136,34 +139,36 @@ public class ModeloAlumnos {
 			
 			//Guardamos los datos
 			
-			alumno = new Alumnos(id,nombre,apellido,dni,localidad,mail,grupo);
+			alumnos = new Alumnos(id,nombre,apellido,dni,localidad,mail,grupo);
 			
 			
 		} else {
-			throw new Exception("No se encuentra ese alumno con c贸digo = " + idAlumno);
+			throw new Exception("No se encuentra ese alumno con codigo = " + idAlumno);
 		}
 		
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			connection.close();
+			preparedStatement.close();
 		}
 	
-		return alumno;
+		return alumnos;
 	}
 
 	public void actualizaBBDD(Alumnos alumnoActualizado) throws Exception {
 		
-		Connection conection=null;
-		PreparedStatement preparedStatement=null;
+		
 		
 		
 		//Conecto:
-		conection=origenDatos.getConnection();
+		connection=origenDatos.getConnection();
 		
 		//Creo la sentencia SQL
 		
 		String sql = "UPDATE alumnos SET Nombre=?, Apellido=?, DNi=?, Localidad=?, mail=?, grupo=? WHERE Id=?";
 		
-		preparedStatement=conection.prepareStatement(sql);
+		preparedStatement=connection.prepareStatement(sql);
 		
 		//Paso los par谩metros
 		
@@ -178,29 +183,31 @@ public class ModeloAlumnos {
 		//Ejecuto
 		preparedStatement.execute();
 		
-	
+		preparedStatement.close();
+		connection.close();
 	}
 
 	public void eliminarAlumno(String id) throws Exception{
-		Connection conection=null;
-		PreparedStatement preparedStatement=null;
 		
 		
 		//Conecto:
-		conection=origenDatos.getConnection();
+		connection=origenDatos.getConnection();
 		
 		
 		//Creo SQL
 		String sql="DELETE FROM alumnos WHERE Id=?";
 		
 		//Preparo consulta
-	preparedStatement=conection.prepareStatement(sql);
+	preparedStatement=connection.prepareStatement(sql);
 		
 		//Establezco par醡etros
 		
 		preparedStatement.setString(1,id);
 		//Ejecuto
 	preparedStatement.execute();
+	
+	preparedStatement.close();
+	connection.close();
 		
 	}
 	
